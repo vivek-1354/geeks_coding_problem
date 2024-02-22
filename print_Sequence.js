@@ -27,4 +27,44 @@ class Print {
 
 const obj = new Print()
 
-obj.printPattern(16)   // 16 11 6 1 -4 1 6 11 16
+// obj.printPattern(16)   // 16 11 6 1 -4 1 6 11 16
+
+
+function printPattern(n) {
+    const input = n;
+    function pattern(n) {
+        let flag = false
+        console.log(n)
+        if (n < 0) {
+            flag = true;
+        }
+        if (flag) {
+            console.log(n)
+            if (n === input) {
+                return
+            }
+            return pattern(n + 5)
+        }
+        if (!flag) {
+            return pattern(n - 5)
+        }
+    }
+    return pattern
+}
+
+
+// printPattern()(16)
+
+function convertToWave(n, arr) {
+    for (let i = 1; i < n; i++) {
+        console.log(i)
+        let temp = arr[i]
+        arr[i] = arr[i - 1]
+        arr[i - 1] = temp
+        i++
+    }
+
+    return arr
+}
+
+console.log(convertToWave(5, [1, 2, 3, 4, 5]))
