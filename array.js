@@ -176,7 +176,7 @@ function reverse(arr) {
 }
 
 // console.log(reverse([10, 20, 30, 40, 50, 60, 70]))
-console.log(reverse([30, 7, 5, 10]))
+// console.log(reverse([30, 7, 5, 10]))
 
 // console.log(12 === "12")
 // console.log(typeof "44")
@@ -184,18 +184,124 @@ console.log(reverse([30, 7, 5, 10]))
 //  remove duplicate from a sorted array
 
 function removeDuplicates(arr) {
-    const sortedArr = []
+    const sortedArr = [arr[0]]    // we insert first element because first ele will be always present in sorted array
 
     for (let i = 1; i < arr.length; i++) {
         if (arr[i - 1] != arr[i]) {
-            sortedArr.push(arr[i - 1])
-        }
-        if (i === arr.length - 1) {
             sortedArr.push(arr[i])
         }
+
     }
     return sortedArr
 }
 
-console.log(removeDuplicates([1, 2, 3, 3, 3, 4, 5, 5, 5, 6, 6, 7, 8, 9]))
-console.log(removeDuplicates([10, 20, 20, 20, 30, 30, 40, 50, 60, 70, 70, 70]))
+// console.log(removeDuplicates([1, 2, 3, 3, 3, 4, 5, 5, 5, 6, 6, 7, 8, 9]))
+// console.log(removeDuplicates([10, 20, 20, 20, 30, 30, 40, 50, 60, 70, 70, 70]))
+
+// remove duplicate and return size of distinct array
+
+
+function removeDuplicates2(arr) {
+    let temp = new Array(arr.length)
+    temp[0] = arr[0]
+    let size = 1
+
+    for (let i = 1; i < arr.length; i++) {
+        if (arr[i] != temp[size - 1]) {
+            temp[size] = arr[i]
+            size++
+        }
+    }
+    return size
+}
+// console.log(removeDuplicates2([1, 2, 3, 3, 3, 4, 5, 5, 5, 6, 6, 7, 8, 9]))
+// console.log(removeDuplicates2([10, 20, 20, 20, 30, 30, 40, 50, 60, 70, 70, 70]))
+// console.log(removeDuplicates2([10, 10, 10, 10]))
+// console.log(removeDuplicates2([10, 10, 10, 10, 20, 20, 20, 30, 30, 30]))
+
+// remove duplicate without using extra space
+
+function removeDuplicates3(arr) {
+    let res = 1
+
+    for (let i = 1; i < arr.length; i++) {
+        if (arr[i] != arr[res - 1]) {
+            arr[res] = arr[i]
+            res++
+        }
+    }
+    return res
+}
+// console.log(removeDuplicates3([1, 2, 3, 3, 3, 4, 5, 5, 5, 6, 6, 7, 8, 9]))
+// console.log(removeDuplicates3([10, 20, 20, 20, 30, 30, 40, 50, 60, 70, 70, 70]))
+// console.log(removeDuplicates3([10, 10, 10, 10]))
+// console.log(removeDuplicates3([10, 10, 10, 10, 20, 20, 20, 30, 30, 30]))
+
+// remove zeros at the end
+
+
+function removeZeroAtEnd(arr) {
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[i] === 0) {
+            for (let j = i + 1; j < arr.length; j++) {
+                if (arr[j] != 0) {
+                    arr[i] = arr[j]
+                    arr[j] = 0;
+                    break;
+                }
+            }
+        }
+    }
+    return arr
+}
+
+// console.log(removeZeroAtEnd(lis))
+// console.log(removeZeroAtEnd([0, 0, 0, 10, 0]))
+
+let lis = [8, 5, 0, 10, 0, 20]
+
+// Here we track a count of non-zero element in countOfNonZero variable
+
+// Then we loop through the array, If we will find non -zero element we simply increment
+// the count, and when we find zero we ingore it and in the next interation if we will 
+// find non -zero we simply swap them using countOfNonZero variable as index
+
+function removeZero(arr) {
+    let countOfNonZero = 0;
+
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[i] != 0) {
+            let temp = arr[i]
+            arr[i] = arr[countOfNonZero];
+            arr[countOfNonZero] = temp
+            countOfNonZero++
+        }
+    }
+    return arr
+}
+
+// console.log(removeZero(lis))
+
+// left rotate an array by one
+
+function leftRotateByOne(arr) {
+    let n = arr.length
+    let ele = arr[0]
+    for (let i = 0; i < n - 1; i++) {
+        arr[i] = arr[i + 1]
+    }
+    arr[n - 1] = ele
+    // return arr
+}
+
+
+function leftRotateByPos(arr, pos) {
+    for (let i = 0; i < pos; i++) {
+        leftRotateByOne(arr)
+    }
+    return arr
+}
+
+
+console.log(leftRotateByOne([1, 2, 3, 4, 5, 6]))
+console.log(leftRotateByPos([1, 2, 3, 4, 5, 6], 2))
