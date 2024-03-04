@@ -303,5 +303,28 @@ function leftRotateByPos(arr, pos) {
 }
 
 
-console.log(leftRotateByOne([1, 2, 3, 4, 5, 6]))
-console.log(leftRotateByPos([1, 2, 3, 4, 5, 6], 2))
+// console.log(leftRotateByOne([1, 2, 3, 4, 5, 6]))
+// console.log(leftRotateByPos([1, 2, 3, 4, 5, 6], 2))
+
+
+// left rotate by given count using reverse function
+
+function reverse2(arr, start, end) {
+    while (start < end) {
+        [arr[start], arr[end]] = [arr[end], arr[start]]
+        start++;
+        end--
+    }
+}
+
+function leftRotateByD(arr, d) {
+    let n = arr.length
+    reverse2(arr, 0, d - 1)   // first reverse first d element
+    reverse2(arr, d, n - 1)  // second reverse d to n-1 element
+    reverse2(arr, 0, n - 1)  // third reverse full array from start to end
+
+    return arr
+}
+
+
+console.log(leftRotateByD([1, 2, 3, 4, 5, 6], 2))
